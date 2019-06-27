@@ -1,0 +1,11 @@
+#print first 5 lines
+# "-n" suppress standard output
+sed -n ' 1,5 p' /etc/passwd
+sed -n ' /^user/ p' /etc/passwd
+
+
+
+# makes backup file and removes lines starting with "#" and empty lines
+# execute without "-i" to check what chages will be applied
+sed -i.commented '/^#/d;/^$/d' /etc/ntp.conf
+

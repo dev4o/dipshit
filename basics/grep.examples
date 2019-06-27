@@ -1,0 +1,5 @@
+# greps only the line starting with $input
+grep ^user /etc/passwd
+
+# any lowercase characters
+declare -f | grep '^[a-z_]'

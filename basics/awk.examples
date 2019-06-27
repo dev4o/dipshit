@@ -1,0 +1,8 @@
+# print file with line numbers
+awk ' BEGIN { print "ntp.conf" } { print NR, $0 } END ' /etc/ntp.conf
+
+
+# filter - ":" as the column delimiter
+ifconfig eth0 | awk -F":" '/HWaddr/{print $3 $4 $5 $6 $7}'
+# uppercase
+ifconfig eth0 | awk -F":" '/HWaddr/{print toupper($3 $4 $5 $6 $7)}'

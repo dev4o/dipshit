@@ -1,0 +1,14 @@
+# Zip apache logs older than 10 days
+# 1 0 * * * find /var/log/httpd/ \( -type f -a ! -name '*.gz' \) -mtime +10 -exec gzip -v {} \;
+---
+//Storage management
+# 01 00 * * * find /storage/automation/ -maxdepth 1 -mtime +7 -exec rm -rf {} \;
+# 10 00 * * * du -sh /home/* | sort -rh | grep G | grep -v autotest | mail -s "$(hostname -s) disk usage, please cleanup unneeded data" "test@mail.com test2@mail.com"
+---
+# umount stale nfs directories 
+# */15 * * * * for m in $(mount | grep '/home/remote' |awk '{print $3}'); do read -t5 < <(stat -t "$m") || umount -l "$m"; done
+---
+
+# prints last 2 lines; cuts 9 characters infront if the line; for every 'gz' does a new line
+# tail -2 file.out | cut -c 9- | tr 'gz' '\n'
+---

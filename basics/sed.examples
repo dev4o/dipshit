@@ -1,11 +1,33 @@
 #print first 5 lines
-# "-n" suppress standard output
-sed -n ' 1,5 p' /etc/passwd
-sed -n ' /^user/ p' /etc/passwd
+"p" - will print the pattern space(matched lines)
+"-n" - will option supress standard output so only matched lines display
+"-i" - permanent change
+
+> Examples
+# sed -n '1,3 p' /etc/passwd # will print only line 1 to 3
+# sed -n '/^root/ p' /etc/passwd # will print only lines starting with "root"
+# sed -n '5,$ p' /etc/passwd # print line from 5 to end of file
 
 
+Makes backup file and removes lines starting with "#" and empty lines
+Execute without "-i" to check what chages will be applied
+# sed -i.commented '/^#/d;/^$/d' /etc/ntp.conf
 
-# makes backup file and removes lines starting with "#" and empty lines
-# execute without "-i" to check what chages will be applied
-sed -i.commented '/^#/d;/^$/d' /etc/ntp.conf
 
+-> SUBSTITUTE command(search and replace)
+The first character following the "s" represents the delimiters, often the "/" is used.
+Add the "g" option should more than one replacement be required per line.
+-> Example
+# sed '/^david/ s@/bin/bash@/bin/sh@' /etc/passwd # replaces shell using "@" as delimiter
+
+-> APPEND\INSERT\DELETE
+# sed ' /^server 3/ a server ntp.example.com' /etc/ntp.conf # append a new line AFTER a line
+# sed ' /^server 3/ i server ntp.example.com' /etc/ntp.conf # append a new line BEFORE a line
+# sed ' /^server\s[0-9]\.ubuntu/d' /etc/ntp.conf # DELETE a line
+
+# /^$/d - deletes empty lines
+# /^\s*#/d - deletes commented lines
+
+-> control file
+# sed -i.bak -f ntp.sed /etc/ntp.conf # remove "-i" while testing
+# ssh -t root@server sed -i.bak -f /tmp/ntp.sed /etc/ntp.conf # executes control file on remote machine

@@ -1,0 +1,7 @@
+// In bash
+$ - marks the end of the line
+^ - marks the beggining of the line
+\s - white space or tabs
+\b - word boundary(reads "-")
+
+

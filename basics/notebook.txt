@@ -4,4 +4,10 @@ $ - marks the end of the line
 \s - white space or tabs
 \b - word boundary(reads "-")
 
+// substitution grouping with SED
+s/ - substitution
+\([^,]*\) - escaped parantheses
+/\U\1/ - replace string: upper cases first grouping
+
+# sed 's@\([^,]*\)@\U\1@' employees
 
